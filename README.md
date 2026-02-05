@@ -20,3 +20,12 @@ Notion のデータベースから「公開」フラグのついたページを�
 
 1. リポジトリをクローンする
 2. [clasp と GitHub の連携](https://www.notion.so/clasp-GitHub-277e35201110807cbe8efe6cea9426b0) を参考に設定を行う
+
+## DB設定
+
+複数DB同期のために、同期対象の Notion Database ID を `DATABASES.js` で指定します。
+
+1. `DATABASES.sample.js` を `DATABASES.js` にコピーする
+2. `DATABASES.js` 内の `NOTION_DATABASE_IDS` に、同期したい Database ID を配列で設定する
+
+`DATABASES.js` は `.gitignore` によりリポジトリへコミットされません。

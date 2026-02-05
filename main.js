@@ -8,18 +8,32 @@
  */
 function syncNotionToDrive() {
   const folder = DriveRepository.getFolder(Config.GOOGLE_DRIVE_FOLDER_ID);
-  
-  // 1. 同期対象のページ一覧を取得
-  const pages = fetchSyncPages();
-  Logger.log(`${pages.length} 件のページが見つかりました。`);
 
-  // 2. 各ページを同期
-  pages.forEach(page => {
-    try {
-      syncPage(page, folder);
-    } catch (e) {
-      Logger.log(`エラー: ページ '${page.id}' の同期に失敗しました。 ${e.toString()}`);
-    }
+  // DB一覧の存在確認
+  if (typeof NOTION_DATABASE_IDS === "undefined" || !Array.isArray(NOTION_DATABASE_IDS)) {
+    throw new Error(
+      "DATABASES.js が見つからないか、NOTION_DATABASE_IDS が配列として定義されていません。DATABASES.sample.js を DATABASES.js にコピーして設定してください。"
+    );
+  }
+
+  // DBごとに同期
+  NOTION_DATABASE_IDS.forEach((databaseId, index) => {
+    Logger.log(`DB同期開始 [${index}]: ${databaseId}`);
+
+    // 同期対象のページ一覧を取得
+    const pages = fetchSyncPages(databaseId);
+    Logger.log(`DB [${index}] ページ数: ${pages.length}`);
+
+    // 各ページを同期
+    pages.forEach(page => {
+      try {
+        syncPage(page, folder);
+      } catch (e) {
+        Logger.log(`エラー: DB [${index}] ページ '${page.id}' の同期に失敗しました。 ${e.toString()}`);
+      }
+    });
+
+    Logger.log(`DB同期完了 [${index}]: ${databaseId}`);
   });
 }
 
@@ -27,14 +41,14 @@ function syncNotionToDrive() {
  * Notion データベースから「公開」フラグが立っているページをすべて取得する
  * @returns {Object[]} Notion ページオブジェクトの配列
  */
-function fetchSyncPages() {
+function fetchSyncPages(databaseId) {
   const dbFilter = {
     'property': '公開',
     'checkbox': {
       'equals': true
     }
   };
-  const response = NotionClient.queryDatabase(Config.NOTION_DATABASE_ID, dbFilter);
+  const response = NotionClient.queryDatabase(databaseId, dbFilter);
   return response.results;
 }
 

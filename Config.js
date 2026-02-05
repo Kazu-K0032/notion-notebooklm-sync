@@ -15,14 +15,6 @@ const Config = {
   },
 
   /**
-   * Notion データベース ID
-   * @type {string}
-   */
-  get NOTION_DATABASE_ID() {
-    return PropertiesService.getScriptProperties().getProperty('NOTION_DATABASE_ID');
-  },
-
-  /**
    * 同期先の Google ドライブフォルダ ID
    * @type {string}
    */
