@@ -4,7 +4,7 @@
 
 ## Overview
 
-This system automatically retrieves pages with a "Published" (公開) flag from a Notion database, converts them into Google Docs format, and saves them to Google Drive.
+This system automatically retrieves pages with a "Published" (公開) flag from Notion databases, converts them into Google Docs format, and saves them to Google Drive.
 
 The goal is to make it easier to utilize information from Notion with external AI tools like NotebookLM.
 
@@ -19,4 +19,13 @@ For detailed information organized in Notion, please refer to the following link
 ## Development Procedures
 
 1. Clone the repository.
-2. Follow the settings in [Integration of clasp and GitHub](https://www.notion.so/clasp-GitHub-277e35201110807cbe8efe6cea9426b0).
+2. Follow the settings in [clasp and GitHub integration](https://www.notion.so/GAS-2ffe3520111080c2bc01f7f5249c85ff).
+
+## DB Setup
+
+To sync multiple databases, specify the target Notion Database IDs in `DATABASES.js`.
+
+1. Copy `DATABASES.sample.js` to `DATABASES.js`.
+2. In `DATABASES.js`, set `NOTION_DATABASE_IDS` as an array of Database IDs to sync.
+
+`DATABASES.js` is ignored by `.gitignore` and should not be committed.
