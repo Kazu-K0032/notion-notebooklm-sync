@@ -19,7 +19,7 @@ Notion のデータベースから「公開」フラグのついたページを�
 ## 開発手順
 
 1. リポジトリをクローンする
-2. [clasp と GitHub の連携](https://www.notion.so/clasp-GitHub-277e35201110807cbe8efe6cea9426b0) を参考に設定を行う
+2. [clasp と GitHub の連携](https://www.notion.so/GAS-2ffe3520111080c2bc01f7f5249c85ff) を参考に設定を行う
 
 ## DB設定
 

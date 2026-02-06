@@ -29,7 +29,7 @@ function syncNotionToDrive() {
       try {
         syncPage(page, folder);
       } catch (e) {
-        Logger.log(`エラー: DB [${index}] ページ '${page.id}' の同期に失敗しました。 ${e.toString()}`);
+        Logger.log(`エラー: DB [${index}] ページ "${page.id}" の同期に失敗しました。 ${e.toString()}`);
       }
     });
 
@@ -43,9 +43,9 @@ function syncNotionToDrive() {
  */
 function fetchSyncPages(databaseId) {
   const dbFilter = {
-    'property': '公開',
-    'checkbox': {
-      'equals': true
+    "property": "公開",
+    "checkbox": {
+      "equals": true
     }
   };
   const response = NotionClient.queryDatabase(databaseId, dbFilter);
@@ -72,22 +72,22 @@ function syncPage(page, folder) {
   if (files.hasNext()) {
     const existingFile = files.next();
     DriveRepository.updateDocument(existingFile.getId(), fullContent);
-    Logger.log(`更新完了: '${pageTitle}'`);
+    Logger.log(`更新完了: "${pageTitle}"`);
   } else {
     DriveRepository.createDocument(folder, pageTitle, fullContent);
-    Logger.log(`新規作成: '${pageTitle}'`);
+    Logger.log(`新規作成: "${pageTitle}"`);
   }
 }
 
 /**
  * Notion ページオブジェクトからタイトル文字列を抽出する
  * @param {Object} page - Notion ページオブジェクト
- * @returns {string} ページタイトル（タイトルがない場合は '無題のページ'）
+ * @returns {string} ページタイトル（タイトルがない場合は "無題のページ"）
  */
 function getPageTitle(page) {
-  const titleProperty = Object.values(page.properties).find(prop => prop.type === 'title');
+  const titleProperty = Object.values(page.properties).find(prop => prop.type === "title");
   if (titleProperty && titleProperty.title && titleProperty.title.length > 0) {
-    return titleProperty.title.map(t => t.plain_text).join('');
+    return titleProperty.title.map(t => t.plain_text).join("");
   }
-  return '無題のページ';
+  return "無題のページ";
 }

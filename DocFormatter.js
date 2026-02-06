@@ -31,7 +31,7 @@ const DocFormatter = {
     try {
       do {
         const data = NotionClient.fetchBlockChildren(blockId, nextCursor);
-        
+
         data.results.forEach(block => {
           content += this.renderBlock(block, indent);
 
@@ -60,18 +60,18 @@ const DocFormatter = {
   renderBlock(block, indent) {
     const type = block.type;
     const text = this.extractPlainText(block);
-    
+
     /** @type {Object<string, function(string): string>} */
     const renderers = {
-      'heading_1': (t) => `\n# ${t}\n\n`,
-      'heading_2': (t) => `\n## ${t}\n\n`,
-      'heading_3': (t) => `\n### ${t}\n\n`,
-      'bulleted_list_item': (t) => `${indent}- ${t}\n`,
-      'numbered_list_item': (t) => `${indent}1. ${t}\n`,
-      'toggle': (t) => `${indent}> ${t} (▼)\n`,
-      'paragraph': (t) => `${indent}${t}\n\n`,
-      'quote': (t) => `${indent}> ${t}\n\n`,
-      'to_do': (t) => {
+      "heading_1": (t) => `\n# ${t}\n\n`,
+      "heading_2": (t) => `\n## ${t}\n\n`,
+      "heading_3": (t) => `\n### ${t}\n\n`,
+      "bulleted_list_item": (t) => `${indent}- ${t}\n`,
+      "numbered_list_item": (t) => `${indent}1. ${t}\n`,
+      "toggle": (t) => `${indent}> ${t} (▼)\n`,
+      "paragraph": (t) => `${indent}${t}\n\n`,
+      "quote": (t) => `${indent}> ${t}\n\n`,
+      "to_do": (t) => {
         const checked = block.to_do.checked ? "[x]" : "[ ]";
         return `${indent}- ${checked} ${t}\n`;
       }
@@ -82,7 +82,7 @@ const DocFormatter = {
     } else if (text) {
       return `${indent}${text}\n`;
     }
-    return '';
+    return "";
   },
 
   /**
@@ -93,8 +93,8 @@ const DocFormatter = {
   extractPlainText(block) {
     const type = block.type;
     if (block[type] && block[type].rich_text && block[type].rich_text.length > 0) {
-      return block[type].rich_text.map(t => t.plain_text).join('');
+      return block[type].rich_text.map(t => t.plain_text).join("");
     }
-    return '';
+    return "";
   }
 };

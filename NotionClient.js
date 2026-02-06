@@ -18,7 +18,7 @@ const NotionClient = {
       filter: filter
     };
     const options = {
-      method: 'post',
+      method: "post",
       headers: Config.NOTION_HEADERS,
       payload: JSON.stringify(payload)
     };
@@ -40,7 +40,7 @@ const NotionClient = {
     }
 
     const options = {
-      method: 'get',
+      method: "get",
       headers: Config.NOTION_HEADERS
     };
 

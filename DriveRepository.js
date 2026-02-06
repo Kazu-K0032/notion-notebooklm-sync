@@ -48,7 +48,7 @@ const DriveRepository = {
     const newDoc = DocumentApp.create(title);
     newDoc.getBody().setText(content);
     newDoc.saveAndClose();
-    
+
     const file = DriveApp.getFileById(newDoc.getId());
     file.moveTo(folder);
     return newDoc;

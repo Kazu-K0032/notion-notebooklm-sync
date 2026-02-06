@@ -9,8 +9,7 @@
  * - `DATABASES.js` は `.gitignore` で管理され、リポジトリにはコミットしません
  * - 本プロジェクトでは `NOTION_DATABASE_ID`（スクリプトプロパティ）は使用しません（廃止）
  */
-// const NOTION_DATABASE_IDS = [
-// 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-// 'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',
-// ];
-
+const NOTION_DATABASE_IDS = [
+  // "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  // "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
+];
